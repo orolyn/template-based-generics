@@ -1,0 +1,13 @@
+#!/usr/bin/env php
+
+<?php
+
+use \Orolyn\Lang\TypeTemplate\TypeBuilder;
+use \Orolyn\Lang\ExtendedLanguage\ScriptLoader;
+
+require_once __DIR__ . '/../vendor/autoload.php';
+
+TypeBuilder::configure(__DIR__ . '/../var/php_plus', true);
+ScriptLoader::configure(__DIR__ . '/../var/php_plus', true);
+
+ScriptLoader::load(sprintf('%s/../examples/%s', __DIR__, $argv[1]));

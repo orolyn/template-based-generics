@@ -1,0 +1,4 @@
+#!/usr/bin/env php
+
+<?php
+require_once __DIR__ . '/../src/Lang/ExtendedLanguage/Resources/grammar/rebuildParsers.php';

@@ -1,0 +1,17 @@
+{
+    "name": "orolyn/generics",
+    "description": "Userland Generics Library",
+    "type": "library",
+    "require": {
+        "nikic/php-parser": "^4.14",
+        "symfony/filesystem": "^6.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Orolyn\\": "src/"
+        }
+    },
+    "require-dev": {
+        "ircmaxell/php-yacc": "^0.0.7"
+    }
+}

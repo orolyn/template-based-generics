@@ -1,0 +1,13 @@
+<?php
+
+class X<T>
+{
+
+}
+
+class Syntax<A, B>
+{
+
+}
+
+$instance = new Syntax<X<string>, X<string>>();

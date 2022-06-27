@@ -1,0 +1,54 @@
+<?php
+
+namespace Test;
+
+use DateTime;
+
+class Item<T>
+{
+    public function __construct(public T $value)
+    {
+    }
+}
+
+interface IDictionary<TKey, TValue>
+{
+    public function add(TKey $key, TValue $value): void;
+    public function get(TKey $key): Item<TValue>;
+}
+
+interface ISimpleDictionary<TKey, TValue> extends IDictionary<TKey, TValue>
+{
+    public function getLast(): TValue;
+}
+
+class MySimpleDictionary<TKey, TValue> implements ISimpleDictionary<TKey, TValue>
+{
+    public TValue $last;
+
+    public function add(TKey $key, TValue $value): void
+    {
+        $this->last = $value;
+    }
+
+    public function get(TKey $key): Item<TValue>
+    {
+        return new Item<TValue>($this->last);
+    }
+
+    public function copy(): MySimpleDictionary<TKey, TValue>
+    {
+        return new MySimpleDictionary<TKey, TValue>();
+    }
+
+    public function getLast(): TValue
+    {
+        return $this->last;
+    }
+}
+
+$sample = new MySimpleDictionary<string, DateTime>();
+$sample->add('a', new DateTime());
+
+var_dump($sample->get('a'));
+

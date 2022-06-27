@@ -1,0 +1,82 @@
+<?php
+
+namespace Test;
+
+use SplObjectStorage;
+
+interface IDictionary<TKey, TValue>
+{
+    public function add(TKey $key, TValue $value): void;
+    public function get(TKey $key): TValue;
+}
+
+class SampleDictionary<TKey, TValue> implements IDictionary<TKey, TValue>
+{
+    /**
+     * @var SplObjectStorage<TKey, TValue>
+     */
+    private SplObjectStorage $source;
+
+    private TValue $last;
+
+    public function __construct()
+    {
+        $this->source = new SplObjectStorage();
+    }
+
+    public function add(TKey $key, TValue $value): void
+    {
+        $this->source[$key] = $value;
+        $this->last = $value;
+    }
+
+    public function get(TKey $key): TValue
+    {
+        return $this->source[$key];
+    }
+
+    public function getLast(): TValue
+    {
+        return $this->last;
+    }
+
+    public function copy(): static
+    {
+        return clone $this;
+    }
+}
+
+class A<T>
+{
+    public function __construct(
+        private T $value
+    ) {
+    }
+
+    public function getValue(): T
+    {
+        return $this->value;
+    }
+}
+
+class B<T>
+{
+    public function __construct(
+        private T $value
+    ) {
+    }
+
+    public function getValue(): T
+    {
+        return $this->value;
+    }
+}
+
+$instance = new SampleDictionary<A<string>, B<string>>();
+
+$a = new A<string>('Class A');
+$b = new B<string>('Class B');
+
+$instance->add($a, $b);
+
+var_dump($instance);
